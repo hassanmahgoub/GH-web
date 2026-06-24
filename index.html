@@ -948,9 +948,31 @@ form.addEventListener("submit", (e) => {
     form.querySelector(".invalid input, .invalid textarea")?.focus();
     return;
   }
+
+  // Build a mailto link so the user’s message opens in their email client.
+  const nameVal = document.getElementById("name")?.value?.trim() || "";
+  const emailVal = document.getElementById("email")?.value?.trim() || "";
+  const subjectVal = document.getElementById("subject")?.value?.trim() || "";
+  const messageVal = document.getElementById("message")?.value?.trim() || "";
+
+  const to = "hassanmohmd127@gmail.com";
+  const subject = subjectVal ? `${subjectVal} — from ${nameVal}` : `Message from ${nameVal}`;
+  const body = [
+    `Name: ${nameVal}`,
+    `Email: ${emailVal}`,
+    "",
+    messageVal
+  ].join("\n");
+
+  const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
   successMsg.classList.add("show");
-  form.reset();
   form.querySelectorAll(".form-field").forEach((f) => f.classList.remove("invalid"));
+
+  // Open email client
+  window.location.href = mailto;
+
+  form.reset();
   setTimeout(() => successMsg.classList.remove("show"), 5000);
 });
 
