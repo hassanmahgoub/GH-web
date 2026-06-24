@@ -964,7 +964,7 @@ form.addEventListener("submit", (e) => {
     messageVal
   ].join("\n");
 
-  const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
   successMsg.classList.add("show");
   form.querySelectorAll(".form-field").forEach((f) => f.classList.remove("invalid"));
